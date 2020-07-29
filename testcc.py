@@ -13,12 +13,12 @@ def test_capitalize_first_char():
 	assert capitalize_first_char(list("i capitalize the first character."), 0) == (list("I capitalize the first character."), 1)
 def test_other_styles():
 	assert other_styles(list("""Lets check this example :
-Value: thoughts,ideologies and deeds of mind
-Victory :winning a goal .
-Job:a task to be completed."""), 0) == (list("""Lets check this example :
-Value : thoughts, ideologies and deeds of mind.
-Victory : winning a goal.
-Job : a task to be completed."""), 7)
+Value: Thoughts ,ideologies and deeds of mind
+Victory :Winning a goal .
+Job:A task to be completed.It should be done within a span of time."""), 0) == (list("""Lets check this example :
+Value : Thoughts, ideologies and deeds of mind.
+Victory : Winning a goal.
+Job : A task to be completed. It should be done within a span of time."""), 9)
 def test_eqn_styles():
 	assert eqn_styles(list("""So, our equation is as follows.
 (2x-1)*5=50
