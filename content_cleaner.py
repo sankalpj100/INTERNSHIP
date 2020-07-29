@@ -1,6 +1,6 @@
 from quiz_app.models import Question, QuestionType, Tag, ReportFlag, User
 import language_tool_python
-
+# The cleanup id : questioncleanup
 # Main function.
 def main(q_tags):
 	cleaner_user = User.query.first()
@@ -10,13 +10,11 @@ def main(q_tags):
 # To select questions using the tags.
 def filter_questions(tags):
 
-    questions = Question.query.filter()
-    print("total", questions.count(), "questions")
+    questions = Question.query.filter(~Question.reports.any()).union_all(Question.query.join(ReportFlag).filter(ReportFlag.user_id!="questioncleanup").distinct(Question.id))
     for tag in tags:
         questions = questions.filter(
             Question.tags.any(Tag.text == tag)
         )
-    print("filtered", questions.count(), "questions")
     return questions
 
 # Initiating the content check for the questions and explanations
@@ -126,7 +124,7 @@ def other_styles(content_char_set, error_count):
 def rem_dup_period(content_char_set, error_count):
 	for index in range(len(content_char_set)):
 		if index == (len(content_char_set)-1):
-					return content_char_set, error_count
+			return content_char_set, error_count
 		if content_char_set[index]==".":
 			while content_char_set[index+1] == ".":
 				content_char_set.pop(index+1)
