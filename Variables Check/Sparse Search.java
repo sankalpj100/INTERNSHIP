@@ -1,3 +1,8 @@
+/*Sparse Search: Given a sorted array of strings that is interspersed with empty strings, write a
+method to find the location of a given string.
+EXAMPLE
+Input: b a l l , { " a t " , "", "", "", "ball", "", "car", "", "", "dad", ""}
+Output: 4*/
 public class SS{
 	public static int modifiedBinarySearch(String[] arrOfStrings, String searchString, int lowerBound, int upperBound) {
 		if (lowerBound > upperBound) {
